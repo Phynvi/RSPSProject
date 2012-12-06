@@ -1,0 +1,2 @@
+To add yourself as a admin go into Player.java and search Mod Vault
+If you get errors use Intelli J as the IDE

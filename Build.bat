@@ -1,0 +1,6 @@
+@echo off
+title Building Client...
+echo Building Client...
+cd src
+javac -cp ./*java
+pause
