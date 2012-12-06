@@ -18,7 +18,7 @@ public class RegionManager {
 	 */
 	public static final int REGION_SIZE = 32;
 
-	public Regions getRegionByLocation(Position location) {
+	public static Regions getRegionByLocation(Position location) {
 		return getRegion(location.getX() / REGION_SIZE, location.getY() / REGION_SIZE);
 	}
 

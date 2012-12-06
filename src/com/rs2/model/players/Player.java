@@ -113,6 +113,7 @@ import com.rs2.model.players.container.equipment.Equipment;
 import com.rs2.model.players.container.inventory.Inventory;
 import com.rs2.model.players.item.Item;
 import com.rs2.model.players.item.ItemDefinition;
+import com.rs2.model.region.RegionManager;
 import com.rs2.model.tick.CycleEvent;
 import com.rs2.model.tick.CycleEventContainer;
 import com.rs2.model.tick.CycleEventHandler;
@@ -359,6 +360,9 @@ public class Player extends Entity {
 	// Public ints
 	public int moveToX, moveToY, moveToH, objectWalkX, objectWalkY, objectX, objectY, objectXOffset, objectYOffset, objectXSize, objectYSize;
 
+	
+	public long regionTimer;
+	
 	public Position npcClickingLocation, objectClickingLocation;
 	//Quest int's
 	public int dragonSlayer = 0;
@@ -1389,6 +1393,8 @@ public class Player extends Entity {
 		//GlobalObjectHandler.createGlobalObject();
         GroundItemManager.getManager().refreshLandscapeDisplay(this);
 		Npc.reloadTransformedNpcs(this);
+		// regionTimer
+		this.regionTimer = System.currentTimeMillis();
 	}
 
 	public void movePlayer(Position position) {
@@ -3384,6 +3390,12 @@ public class Player extends Entity {
 						}
 					}
 				}*/
+				if(RegionManager.getRegionByLocation(npc.getPosition()).equals(RegionManager.getRegionByLocation(getCurrentRegion()))){
+					if(System.currentTimeMillis() - regionTimer > 900000){
+						continue;
+					}
+				}
+				
 				CombatCycleEvent.CanAttackResponse response = CombatCycleEvent.canAttack(npc, this);
 				if (response != CombatCycleEvent.CanAttackResponse.SUCCESS)
 					continue;
