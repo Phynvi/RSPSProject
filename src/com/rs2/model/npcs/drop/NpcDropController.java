@@ -201,6 +201,14 @@ public class NpcDropController {
 		}
 		return false;
 	}
+	public boolean isKey(int key){
+		switch(key){
+			case 987:
+			case 985:
+				return true;
+		}
+		return false;
+	}	
 	public boolean isHerb(int herbId){
 		switch(herbId){
 		case 199:
@@ -239,6 +247,9 @@ public class NpcDropController {
 				if(item.getChance() == 2){
 					item.chance = 3;
 				}
+			}
+			if(isKey(item.getId())){
+				item.chance = 4;
 			}
 			if (item.getChance() == 2) {
 				c++;
